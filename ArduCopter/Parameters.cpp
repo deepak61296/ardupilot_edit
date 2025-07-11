@@ -75,6 +75,14 @@ const AP_Param::Info Copter::var_info[] = {
     // @Bitmask: 0:Roll,1:Pitch,2:Yaw,3:AccelZ
     GSCALAR(gcs_pid_mask,           "GCS_PID_MASK",     0),
 
+    // @Param: DEEPAK_UAV
+    // @DisplayName: Deepak UAV Parameter
+    // @Description: A custom test parameter added by Deepak for development
+    // @Range: -32768 32767
+    // @User: Advanced
+    GSCALAR(deepak_uav, "DEEPAK_UAV", DEEPAK_UAV_DEFAULT),
+
+
 #if MODE_RTL_ENABLED
     // @Param: RTL_ALT
     // @DisplayName: RTL Altitude

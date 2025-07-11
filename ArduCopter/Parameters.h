@@ -179,6 +179,7 @@ public:
         k_param_heli_servo_rsc,     // 89 = full! - remove
 
         //
+        k_param_deepak_uav = 89,        // Custom parameter by Deepak
         // 90: misc2
         //
         k_param_motors = 90,
@@ -388,7 +389,8 @@ public:
         // the k_param_* space is 9-bits in size
         // 511: reserved
     };
-
+    
+    AP_Int16        deepak_uav; // Custom parameter by Deepak
     AP_Int16        format_version;
 
     AP_Float        throttle_filt;

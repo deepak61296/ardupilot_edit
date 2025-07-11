@@ -611,3 +611,7 @@
 #ifndef USER_PARAMS_ENABLED
   #define USER_PARAMS_ENABLED 0
 #endif
+
+#ifndef DEEPAK_UAV_DEFAULT
+ #define DEEPAK_UAV_DEFAULT 100    // default value for Deepak's test parameter
+#endif
