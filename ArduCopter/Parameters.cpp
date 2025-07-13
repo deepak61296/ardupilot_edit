@@ -81,6 +81,13 @@ const AP_Param::Info Copter::var_info[] = {
     // @Range: -32768 32767
     // @User: Advanced
     GSCALAR(deepak_uav, "DEEPAK_UAV", DEEPAK_UAV_DEFAULT),
+    
+    //Param: DEEPAK_MODE
+    // @DisplayName: Deepak Mode Parameter
+    // @Description: A custom test parameter added by Deepak for development    
+    // @Range: 0 2
+    // @User: Advanced
+    GSCALAR(deepak_mode, "DEEPAK_MODE", DEEPAK_MODE_DEFAULT),
 
 
 #if MODE_RTL_ENABLED

@@ -766,31 +766,52 @@ uint32_t Copter::ap_value() const
 // one_hz_loop - runs at 1Hz
 void Copter::one_hz_loop()
 {
-#if CONFIG_HAL_BOARD == HAL_BOARD_SITL
-    gcs().send_text(MAV_SEVERITY_INFO, "DEEPAK_UAV = %d", (int)g.deepak_uav.get());
-#endif
-
+// #if CONFIG_HAL_BOARD == HAL_BOARD_SITL
+//     gcs().send_text(MAV_SEVERITY_INFO, "DEEPAK_UAV = %d", (int)g.deepak_uav.get());
+// #endif
+if(g.deepak_uav.get() > 0){
+    static uint32_t last_action = 0;
+    uint32_t action_interval = 1000 / g.deepak_uav.get();
+    if(AP_HAL::millis() - last_action > action_interval){
+        switch(g.deepak_mode.get()){
+            case 0: //LED BLINK
+                gcs().send_text(MAV_SEVERITY_INFO,"LED Blink! rate: %d Hz", (int)g.deepak_uav.get());
+                break;
+            case 1: //my coustum mode
+                gcs().send_text(MAV_SEVERITY_INFO,"MY MODE ! _ Vale : %d", (int)g.deepak_uav.get());
+                break;
+            case 2:{
+             int16_t servo_value = 1500 + (g.deepak_uav.get() * 50);
+             SRV_Channels::set_output_pwm(SRV_Channel::k_motor8, servo_value);
+                gcs().send_text(MAV_SEVERITY_INFO,"Servo control %d",servo_value);
+            }
+            break;
+        }
+        last_action = AP_HAL::millis();
+    }
+}
 #if HAL_LOGGING_ENABLED
     if (should_log(MASK_LOG_ANY)) {
         Log_Write_Data(LogDataID::AP_STATE, ap_value());
     }
 
-// In one_hz_loop() or appropriate function
-if (g.deepak_uav.get() > 0) {
-    // Blink LED at rate determined by parameter value
-    static uint32_t last_blink = 0;
-    uint32_t blink_interval = 1000 / g.deepak_uav.get(); // ms
+// // In one_hz_loop() or appropriate function
+// if (g.deepak_uav.get() > 0) {
+//     // Blink LED at rate determined by parameter value
+//     static uint32_t last_blink = 0;
+//     uint32_t blink_interval = 1000 / g.deepak_uav.get(); // ms
     
-    if (AP_HAL::millis() - last_blink > blink_interval) {
-        // Use the existing LED methods instead of direct GPIO
-        AP_Notify::flags.armed = !AP_Notify::flags.armed; // Toggle LED state
+//     if (AP_HAL::millis() - last_blink > blink_interval) {
+//         // Use the existing LED methods instead of direct GPIO
+//         AP_Notify::flags.armed = !AP_Notify::flags.armed; // Toggle LED state
         
-        // Or better yet, send a message so you can see it working
-        gcs().send_text(MAV_SEVERITY_INFO, "LED Blink! Rate: %d Hz", (int)g.deepak_uav.get());
+//         // Or better yet, send a message so you can see it working
+//         gcs().send_text(MAV_SEVERITY_INFO, "LED Blink! Rate: %d Hz", (int)g.deepak_uav.get());
         
-        last_blink = AP_HAL::millis();
-    }
-}
+//         last_blink = AP_HAL::millis();
+//     }
+// }
+
 #endif
 
     if (!motors->armed()) {

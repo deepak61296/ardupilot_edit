@@ -615,3 +615,7 @@
 #ifndef DEEPAK_UAV_DEFAULT
  #define DEEPAK_UAV_DEFAULT 100    // default value for Deepak's test parameter
 #endif
+
+#ifndef DEEPAK_MODE_DEFAULT
+  #define DEEPAK_MODE_DEFAULT 0    // default value for Deepak's mode parameter
+#endif
