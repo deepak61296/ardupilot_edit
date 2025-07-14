@@ -77,6 +77,7 @@
 #include "Copter.h"
 #include <AP_InertialSensor/AP_InertialSensor_rate_config.h>
 
+
 #define FORCE_VERSION_H_INCLUDE
 #include "version.h"
 #undef FORCE_VERSION_H_INCLUDE
@@ -763,12 +764,19 @@ uint32_t Copter::ap_value() const
     return ret;
 }
 
+
 // one_hz_loop - runs at 1Hz
 void Copter::one_hz_loop()
 {
 // #if CONFIG_HAL_BOARD == HAL_BOARD_SITL
 //     gcs().send_text(MAV_SEVERITY_INFO, "DEEPAK_UAV = %d", (int)g.deepak_uav.get());
 // #endif
+    static bool initialized = false;
+    if (!initialized) {
+        custom_module.init();
+        initialized = true;
+    }
+
 if(g.deepak_uav.get() > 0){
     static uint32_t last_action = 0;
     uint32_t action_interval = 1000 / g.deepak_uav.get();
@@ -790,6 +798,7 @@ if(g.deepak_uav.get() > 0){
         last_action = AP_HAL::millis();
     }
 }
+custom_module.update();
 #if HAL_LOGGING_ENABLED
     if (should_log(MASK_LOG_ANY)) {
         Log_Write_Data(LogDataID::AP_STATE, ap_value());

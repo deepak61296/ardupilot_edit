@@ -88,6 +88,10 @@ const AP_Param::Info Copter::var_info[] = {
     // @Range: 0 2
     // @User: Advanced
     GSCALAR(deepak_mode, "DEEPAK_MODE", DEEPAK_MODE_DEFAULT),
+    // Add this line (keep your existing DEEPAK_UAV and DEEPAK_MODE):
+    // @Group: CUSTOM_
+    // @Path: ../libraries/AP_CustomModule/AP_CustomModule.cpp
+    GOBJECT(custom_module, "CUSTOM_", AP_CustomModule),
 
 
 #if MODE_RTL_ENABLED

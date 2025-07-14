@@ -175,8 +175,9 @@ public:
         k_param_heli_roll_ff,       // remove
         k_param_heli_yaw_ff,        // remove
         k_param_heli_stab_col_min,  // remove
-        k_param_heli_stab_col_max,  // remove
+        //k_param_heli_stab_col_max,  // remove
         //k_param_heli_servo_rsc,     // 89 = full! - remove
+        k_param_custom_module = 87,
         k_param_deepak_mode = 88,
 
         //
@@ -393,6 +394,7 @@ public:
     
     AP_Int16        deepak_uav; // Custom parameter by Deepak
     AP_Int16        deepak_mode; // Custom parameter by Deepak
+    AP_Int16        custom_module; // Custom module parameter
     AP_Int16        format_version;
 
     AP_Float        throttle_filt;

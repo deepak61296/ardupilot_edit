@@ -76,7 +76,8 @@
 // Configuration
 #include "defines.h"
 #include "config.h"
-
+//deepak new my custom module
+#include <AP_CustomModule/AP_CustomModule.h> // Custom module library
 #if FRAME_CONFIG == HELI_FRAME
  #define MOTOR_CLASS AP_MotorsHeli
 #else
@@ -235,7 +236,7 @@ public:
     Copter(void);
 
 private:
-
+    AP_CustomModule custom_module;  // This creates an instance of our library
     // key aircraft parameters passed to multiple libraries
     AP_MultiCopter aparm;
 
